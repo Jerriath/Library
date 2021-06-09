@@ -61,6 +61,7 @@
     height: 400px;
     text-align: center;
     border-top-right-radius: 0px;;
+    border-bottom-left-radius: 0px;
 }
 
 #closeForm {
@@ -73,6 +74,19 @@
 
 #closeForm:hover {
     background-color: #bbb;
+}
+
+#submit {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    bottom: 30px;
+    width: 100px;
+    height: 30px;
+    border-radius: 15px;
+    border: 1px solid black;
 }
 
 .book {

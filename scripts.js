@@ -67,6 +67,13 @@ closeForm.addEventListener("click", () => {
     bookForm.style.display = "none";
 })
 
+//Function to add book to library after submitting form (NOT IMPLEMENTED)
+function addBookToLib() {
+    let newTitle = document.querySelector("#titleInput").value;
+    let newAuthor = document.querySelector("#authorInput").value;
+    let newPages = document.querySelector("#pagesInput").value;
+}
+
 //Function for info button functionality (NOT IMPLEMENTED)
 function showInfo(e) {
     return;
