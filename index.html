@@ -14,11 +14,22 @@
 
         </div>
         <div id="library">
-            <button class="book" id="addBook">
-
-            </button>
+            <div class="book" id="addBookDiv">
+                <h2 id="addBook" class="bookText">
+                    +
+                </h2>
+            </div>
         </div>
-
+        <form id="bookForm" class="book">
+            <label for="titleInput" class="label">Title: </label>
+            <br>
+            <input type="text" name="titleInput" class="textInput" id="titleInput">
+            <label for="author" class="label">Author: </label>
+            <br>
+            <input type="text" name="authorInput" class="textInput" id="authorInput">
+            <br>
+            <input type="submit" id="submit"></input>
+        </form>
         <script src="scripts.js"></script>
     </body>
 </html>
