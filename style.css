@@ -46,7 +46,7 @@
 }
 
 #bookForm {
-    display: inherit;
+    display: none;
     position: fixed;
     left: 0;
     right: 0;
@@ -60,6 +60,19 @@
     width: 250px;
     height: 400px;
     text-align: center;
+    border-top-right-radius: 0px;;
+}
+
+#closeForm {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-top-right-radius: 0px;;
+    border: 1px solid black;
+}
+
+#closeForm:hover {
+    background-color: #bbb;
 }
 
 .book {

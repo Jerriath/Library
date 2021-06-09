@@ -3,6 +3,7 @@ const bookShelf = document.querySelector("#library");
 const addBookBtn = document.querySelector("#addBook");
 const addBookDiv = document.querySelector("#addBookDiv")
 const stats = document.querySelector("#stats");
+const inputForm = document.querySelector("#bookForm");
 
 
 function Book(title, author, pages, read) {
@@ -51,14 +52,25 @@ let library = {
     },
 };
 
+//Function to make form appear when clicking addBookBtn
+function openForm() {
+    bookForm.style.display = "inherit";
+}
+addBookBtn.addEventListener("click", () => {
+    console.log("hello");
+    openForm();
+});
+
+//Function to close form when clicking the x button
+const closeForm = document.querySelector("#closeForm");
+closeForm.addEventListener("click", () => {
+    bookForm.style.display = "none";
+})
+
 //Function for info button functionality (NOT IMPLEMENTED)
 function showInfo(e) {
     return;
 }
-
-addBookBtn.addEventListener("click", function(e) {
-    console.log(e);
-});
 
 
 
