@@ -3,7 +3,9 @@ const bookShelf = document.querySelector("#library");
 const addBookBtn = document.querySelector("#addBook");
 const addBookDiv = document.querySelector("#addBookDiv")
 const stats = document.querySelector("#stats");
-const inputForm = document.querySelector("#bookForm");
+const bookForm = document.querySelector("#bookForm");
+const closeFormBtn = document.querySelector("#closeForm");
+const submitBtn = document.querySelector("#submit");
 
 
 function Book(title, author, pages, read) {
@@ -12,12 +14,17 @@ function Book(title, author, pages, read) {
     this.pages = pages;
     this.read = read;
     this.info = () => {
-        return `${title} by ${author}, ${pages} pages, ${read}`;
+        let readText = "not read yet";
+        if (read)
+        {
+            readText = "have already read"
+        }
+        return `${title} by ${author}, ${pages} pages, ${readText}`;
     };
 
 }
 
-
+//Declaring the library object and associated attributs and functions
 let library = {
     shelf: new Array(),
     //Function to create a new div element to add to DOM
@@ -40,39 +47,43 @@ let library = {
     //Function to add a new book to the shelf array
     addToLibrary: function(book) {
         this.shelf.push(book);
-        this.addToDOM(book);
+        this.displayBooks();
     },
     //Function for displaying current books in console
     displayBooks: function() {
         let numOfBooks = this.shelf.length;
         for (let i = 0; i < numOfBooks; i++) 
         {
-            console.log(this.shelf[i].info());
+            this.addToDOM(library.shelf[i]);
         }
     },
 };
 
 //Function to make form appear when clicking addBookBtn
 function openForm() {
-    bookForm.style.display = "inherit";
+    bookForm.style.display = "inline-block";
 }
-addBookBtn.addEventListener("click", () => {
-    console.log("hello");
-    openForm();
-});
 
 //Function to close form when clicking the x button
-const closeForm = document.querySelector("#closeForm");
-closeForm.addEventListener("click", () => {
+function closeForm() {
     bookForm.style.display = "none";
-})
+}
 
 //Function to add book to library after submitting form (NOT IMPLEMENTED)
 function addBookToLib() {
     let newTitle = document.querySelector("#titleInput").value;
     let newAuthor = document.querySelector("#authorInput").value;
     let newPages = document.querySelector("#pagesInput").value;
+    let newRead = document.querySelector("#readInput").value;
+    newBook = new Book(newTitle, newAuthor, newPages, newRead);
+    library.addToLibrary(newBook);
 }
+
+//Function to add book when clickling submit
+submitBtn.addEventListener("click", () => {
+    addBookToLib();
+    bookForm.style.display = "none";
+});
 
 //Function for info button functionality (NOT IMPLEMENTED)
 function showInfo(e) {

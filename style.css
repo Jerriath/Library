@@ -64,7 +64,7 @@
     border-bottom-left-radius: 0px;
 }
 
-#closeForm {
+#closeFormBtn {
     position: absolute;
     top: 0;
     right: 0;
@@ -74,6 +74,11 @@
 
 #closeForm:hover {
     background-color: #bbb;
+}
+
+#readInput {
+    width: 30px;
+    height: 40px;
 }
 
 #submit {

@@ -14,25 +14,26 @@
 
         </div>
         <div id="library">
-            <div class="book" id="addBookDiv">
+            <div class="book" id="addBookDiv" onclick="openForm()">
                 <h2 id="addBook" class="bookText">
                     +
                 </h2>
             </div>
         </div>
-        <form id="bookForm" class="book">
-            <button id="closeForm">x</button>
+        <!--Use a div here because form refreshes page after submitting or closing form-->
+        <div id="bookForm" class="book">
+            <button id="closeFormBtn" onclick="closeForm()">x</button>
             <label for="titleInput" class="label">Title: </label>
-            <br>
             <input type="text" name="titleInput" class="textInput" id="titleInput">
             <label for="authorInput" class="label">Author: </label>
-            <br>
             <input type="text" name="authorInput" class="textInput" id="authorInput">
-            <br>
             <label for="pagesInput" class="label">Pages: </label>
             <input type="number" name="pagesInput" class="textInput" id="pagesInput">
-            <input type="submit" id="submit"></input>
-        </form>
+            <label for="readInput" class="label">Have you read this book? </label>
+            <br>
+            <input type="checkbox" name="readInput" id="readInput">
+            <button id="submit">Submit</button>
+        </div>
         <script src="scripts.js"></script>
     </body>
 </html>
