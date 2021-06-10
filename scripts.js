@@ -31,6 +31,17 @@ let library = {
     addToDOM: function(book) {
         let newBook = document.createElement("div");
         newBook.classList.add("book");
+        let infoPage = document.createElement("div");
+        infoPage.classList.add("book");
+        infoPage.classList.add("infoPage");
+        let closeInfo = document.createElement("button");
+        closeInfo.classList.add("closeFormBtn");
+        closeInfo.textContent = "x";
+        infoPage.appendChild(closeInfo);
+        closeInfo.addEventListener("click", function(e){
+            closeInfoPage(e);
+        });
+        newBook.appendChild(infoPage);
         let bookText = document.createElement("h2");
         bookText.textContent = book.title;
         bookText.classList.add("bookText");
@@ -69,6 +80,11 @@ function closeForm() {
     bookForm.style.display = "none";
 }
 
+//Function to close infoPage when clicking the x button
+function closeInfoPage(e) {
+    e.target.parentElement.style.display = "none";
+}
+
 //Function to add book to library after submitting form (NOT IMPLEMENTED)
 function addBookToLib() {
     let newTitle = document.querySelector("#titleInput").value;
@@ -86,8 +102,9 @@ submitBtn.addEventListener("click", () => {
 });
 
 //Function for info button functionality (NOT IMPLEMENTED)
+
 function showInfo(e) {
-    return;
+    e.target.parentElement.firstChild.style.display = "block";
 }
 
 
