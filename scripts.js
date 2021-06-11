@@ -41,6 +41,13 @@ let library = {
         newBook.appendChild(bookText);
         let info = document.createElement("button");
         info.textContent = "info";
+        let removeBook = document.createElement("button");
+        removeBook.textContent = "x";
+        removeBook.classList.add("closeFormBtn");
+        removeBook.addEventListener("click", function(e) {
+            removeFromLib(e);
+        });
+        newBook.appendChild(removeBook);
         info.addEventListener("click", function(e){
             showInfo(e);
         });
@@ -50,7 +57,6 @@ let library = {
     },
     //Function to add a new book to the shelf array
     addToLibrary: function(book) {
-        book.index = this.shelf.length;
         this.shelf.push(book);
         this.displayBooks();
     },
@@ -66,9 +72,22 @@ let library = {
         }
         for (let i = 0; i < numOfBooks; i++) 
         {
+            library.shelf[i].index = i;
             this.addToDOM(library.shelf[i]);
         }
     },
+    refreshLibrary: function() {
+        let numOfBooks = this.shelf.length;
+        for (let i = 0; i < numOfBooks; i++)
+        {
+            libraryContainer.removeChild(libraryContainer.children[0]);
+        }
+        for (let i = 0; i < numOfBooks; i++) 
+        {
+            library.shelf[i].index = i;
+            this.addToDOM(library.shelf[i]);
+        }
+    }
 };
 
 //Function to make form appear when clicking addBookBtn
@@ -84,6 +103,7 @@ function closeForm() {
 //Function to close infoPage when clicking the x button
 function closeInfoPage(e) {
     e.target.parentElement.style.display = "none";
+    e.target.parentElement.parentElement.children[2].style.display = "block";
 }
 
 //Function to add book to library after submitting form
@@ -106,6 +126,10 @@ function addBookToLib() {
 //Function to add book when clickling submit
 submitBtn.addEventListener("click", () => {
     addBookToLib();
+    document.querySelector("#titleInput").value = "";
+    document.querySelector("#authorInput").value = "";
+    document.querySelector("#pagesInput").value = "";
+    document.querySelector("#readInput").checked = false;
     bookForm.style.display = "none";
 });
 
@@ -167,6 +191,7 @@ function fillInfo(infoPage, book) {
 //Function for info button functionality
 function showInfo(e) {
     e.target.parentElement.firstChild.style.display = "block";
+    e.target.parentElement.children[2].style.display = "none";
 }
 
 //Function to change read status
@@ -187,6 +212,14 @@ function changeStatus(e) {
     }
 }
 
+//Function for removing a book from library
+function removeFromLib(e) {
+    let book = e.target.parentElement;
+    index = book.index;
+    library.shelf.splice(index, 1);
+    book.remove();
+    library.refreshLibrary();
+}
 
 //Test books
 let hp = new Book("Harry Potter and the Halfblood Prince", "J. K. Rowling", "hella", "not read yet");
