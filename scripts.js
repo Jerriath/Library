@@ -6,6 +6,7 @@ const stats = document.querySelector("#stats");
 const bookForm = document.querySelector("#bookForm");
 const closeFormBtn = document.querySelector("#closeForm");
 const submitBtn = document.querySelector("#submit");
+const libraryContainer = document.querySelector("#library");
 
 
 function Book(title, author, pages, read) {
@@ -14,10 +15,10 @@ function Book(title, author, pages, read) {
     this.pages = pages;
     this.read = read;
     this.info = () => {
-        let readText = "not read yet";
+        let readText = "Not Read Yet";
         if (read)
         {
-            readText = "have already read"
+            readText = "Already Read"
         }
         return `${title} by ${author}, ${pages} pages, ${readText}`;
     };
@@ -31,16 +32,7 @@ let library = {
     addToDOM: function(book) {
         let newBook = document.createElement("div");
         newBook.classList.add("book");
-        let infoPage = document.createElement("div");
-        infoPage.classList.add("book");
-        infoPage.classList.add("infoPage");
-        let closeInfo = document.createElement("button");
-        closeInfo.classList.add("closeFormBtn");
-        closeInfo.textContent = "x";
-        infoPage.appendChild(closeInfo);
-        closeInfo.addEventListener("click", function(e){
-            closeInfoPage(e);
-        });
+        let infoPage = createInfo(book);
         newBook.appendChild(infoPage);
         let bookText = document.createElement("h2");
         bookText.textContent = book.title;
@@ -63,6 +55,15 @@ let library = {
     //Function for displaying current books in console
     displayBooks: function() {
         let numOfBooks = this.shelf.length;
+        console.log(numOfBooks);
+        console.log(libraryContainer.children.length);
+        if (libraryContainer.children.length != 1)
+        {
+            for (let i = 0; i < numOfBooks - 1; i++) 
+            {
+                libraryContainer.removeChild(libraryContainer.children[0]);
+            }
+        }
         for (let i = 0; i < numOfBooks; i++) 
         {
             this.addToDOM(library.shelf[i]);
@@ -85,7 +86,7 @@ function closeInfoPage(e) {
     e.target.parentElement.style.display = "none";
 }
 
-//Function to add book to library after submitting form (NOT IMPLEMENTED)
+//Function to add book to library after submitting form
 function addBookToLib() {
     let newTitle = document.querySelector("#titleInput").value;
     let newAuthor = document.querySelector("#authorInput").value;
@@ -101,12 +102,64 @@ submitBtn.addEventListener("click", () => {
     bookForm.style.display = "none";
 });
 
-//Function for info button functionality (NOT IMPLEMENTED)
+//Function to create info page and return it
+function createInfo(book) {
+    let infoPage = document.createElement("div");
+    infoPage.classList.add("book");
+    infoPage.classList.add("infoPage");
+    let closeInfo = document.createElement("button");
+    closeInfo.classList.add("closeFormBtn");
+    closeInfo.textContent = "x";
+    infoPage.appendChild(closeInfo);
+    fillInfo(infoPage, book);
+    closeInfo.addEventListener("click", function(e){
+        closeInfoPage(e);
+    });
+    return infoPage;
+}
 
+//Function to fill in information elements on info page
+function fillInfo(infoPage, book) {
+    let title = document.createElement("p");
+    title.textContent = "Title: " + book.title;
+    let author = document.createElement("p");
+    author.textContent = "Author: " + book.author;
+    let pages = document.createElement("p");
+    pages.textContent ="Pages: " +  book.pages;
+    let readYet = document.createElement("p");
+    if (book.read)
+    {
+        readYet.textContent = "Status: Already Read"
+    }
+    else
+    {
+        readYet.textContent = "Status: Not Read Yet";
+    }
+    let changeStatusBtn = document.createElement("button");
+    infoPage.appendChild(title);
+    infoPage.appendChild(author);
+    infoPage.appendChild(pages);
+    infoPage.appendChild(readYet);
+    console.log(infoPage.children[4].textContent);
+    changeStatusBtn.onclick = changeStatus(infoPage, book);
+}
+
+//Function for info button functionality
 function showInfo(e) {
     e.target.parentElement.firstChild.style.display = "block";
 }
 
+//Function to change read status
+function changeStatus(infoPage, book) {
+    if (book.read)
+    {
+        infoPage.children[4].textContent = "Status: Not Read Yet";
+    }
+    else
+    {
+        infoPage.children[4].textContent = "Status: Already Read";
+    }
+}
 
 
 //Test books

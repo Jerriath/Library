@@ -125,6 +125,10 @@
     bottom: 0;
     margin-top: auto;
     margin-bottom: auto;
+    width: 110%;
+    height: 110%;
+    text-align: left;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 .infoBtn {
