@@ -64,6 +64,22 @@
     border-bottom-left-radius: 0px;
 }
 
+.statsLeft {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin: 10px;
+    font-size: 18px;
+}
+
+.statsRight {
+    position: absolute;
+    right: 0px;
+    top: 145px;
+    font-size: 18px;
+    margin-right: 10px;
+}
+
 .closeFormBtn {
     position: absolute;
     top: 0;
