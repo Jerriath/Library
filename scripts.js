@@ -14,6 +14,7 @@ function Book(title, author, pages, read) {
     this.author = author;
     this.pages = pages;
     this.read = read;
+    this.index = null;
     this.info = () => {
         let readText = "Not Read Yet";
         if (read)
@@ -49,14 +50,13 @@ let library = {
     },
     //Function to add a new book to the shelf array
     addToLibrary: function(book) {
+        book.index = this.shelf.length;
         this.shelf.push(book);
         this.displayBooks();
     },
     //Function for displaying current books in console
     displayBooks: function() {
         let numOfBooks = this.shelf.length;
-        console.log(numOfBooks);
-        console.log(libraryContainer.children.length);
         if (libraryContainer.children.length != 1)
         {
             for (let i = 0; i < numOfBooks - 1; i++) 
@@ -92,6 +92,13 @@ function addBookToLib() {
     let newAuthor = document.querySelector("#authorInput").value;
     let newPages = document.querySelector("#pagesInput").value;
     let newRead = document.querySelector("#readInput").value;
+    if (newRead == "on")
+    {
+        newRead = true;
+    }
+    else {
+        newRead = false;
+    }
     newBook = new Book(newTitle, newAuthor, newPages, newRead);
     library.addToLibrary(newBook);
 }
@@ -126,7 +133,11 @@ function fillInfo(infoPage, book) {
     author.textContent = "Author: " + book.author;
     let pages = document.createElement("p");
     pages.textContent ="Pages: " +  book.pages;
+    let index = document.createElement("p");
+    index.textContent = book.index;
+    index.classList.add("index");
     let readYet = document.createElement("p");
+    console.log(book.read);
     if (book.read)
     {
         readYet.textContent = "Status: Already Read"
@@ -139,9 +150,18 @@ function fillInfo(infoPage, book) {
     infoPage.appendChild(title);
     infoPage.appendChild(author);
     infoPage.appendChild(pages);
+    infoPage.appendChild(index);
     infoPage.appendChild(readYet);
-    console.log(infoPage.children[4].textContent);
-    changeStatusBtn.onclick = changeStatus(infoPage, book);
+    infoPage.appendChild(changeStatusBtn);
+    changeStatusBtn.addEventListener("click", function(e){
+        changeStatus(e);
+    });
+    if (book.read) {
+        changeStatusBtn.textContent = "Unread";
+    }
+    else {
+        changeStatusBtn.textContent = "Read";
+    }
 }
 
 //Function for info button functionality
@@ -150,14 +170,20 @@ function showInfo(e) {
 }
 
 //Function to change read status
-function changeStatus(infoPage, book) {
-    if (book.read)
+function changeStatus(e) {
+    let index = e.target.parentElement.children[4].textContent;
+    library.shelf[index].read = !library.shelf[index].read;
+    let infoPage = e.target.parentElement;
+    let read = library.shelf[index].read;
+    if (read)
     {
-        infoPage.children[4].textContent = "Status: Not Read Yet";
+        infoPage.children[5].textContent = "Status: Already Read";
+        infoPage.children[6].textContent = "Unread";
     }
     else
     {
-        infoPage.children[4].textContent = "Status: Already Read";
+        infoPage.children[5].textContent = "Status: Not Read Yet";
+        infoPage.children[6].textContent = "Read";
     }
 }
 
