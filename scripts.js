@@ -7,6 +7,7 @@ const bookForm = document.querySelector("#bookForm");
 const closeFormBtn = document.querySelector("#closeForm");
 const submitBtn = document.querySelector("#submit");
 const libraryContainer = document.querySelector("#library");
+const statsBar = document.querySelector("#stats");
 
 
 function Book(title, author, pages, read) {
@@ -59,6 +60,7 @@ let library = {
     addToLibrary: function(book) {
         this.shelf.push(book);
         this.displayBooks();
+        refreshStats();
     },
     //Function for displaying current books in console
     displayBooks: function() {
@@ -161,7 +163,6 @@ function fillInfo(infoPage, book) {
     index.textContent = book.index;
     index.classList.add("index");
     let readYet = document.createElement("p");
-    console.log(book.read);
     if (book.read)
     {
         readYet.textContent = "Status: Already Read"
@@ -214,12 +215,41 @@ function changeStatus(e) {
 
 //Function for removing a book from library
 function removeFromLib(e) {
+    console.log(e.target.parentElement.children[1].outerText);
     let book = e.target.parentElement;
-    index = book.index;
+    index = book.firstChild.children[4].textContent;
     library.shelf.splice(index, 1);
     book.remove();
     library.refreshLibrary();
+    refreshStats();
 }
+
+//Function to refresh the stats bar
+function refreshStats() {
+    //This section of function retrieves info from library
+    let numOfBooks = library.shelf.length;
+    let booksRead = 0;
+    let booksNotRead = 0;
+    let pagesRead = 0;
+    for (let i = 0; i < numOfBooks; i++)
+    {
+       if (library.shelf[i].read)
+       {
+           booksRead++;
+           pagesRead += parseInt(library.shelf[i].pages);
+       }
+       else {
+           booksNotRead++;
+       }
+    }
+
+    //This section actually alters the DOM to update info
+    document.querySelector("#totalBooks").textContent = "Books: " + numOfBooks;
+    document.querySelector("#booksRead"). textContent = "Already Read: " + booksRead;
+    document.querySelector("#notRead").textContent = "Bot Read Yet: " + booksNotRead;
+    document.querySelector("#pagesRead").textContent = "Total Pages Read: " + pagesRead;
+}
+
 
 //Test books
 let hp = new Book("Harry Potter and the Halfblood Prince", "J. K. Rowling", "hella", "not read yet");
