@@ -211,6 +211,7 @@ function changeStatus(e) {
         infoPage.children[5].textContent = "Status: Not Read Yet";
         infoPage.children[6].textContent = "Read";
     }
+    refreshStats();
 }
 
 //Function for removing a book from library
