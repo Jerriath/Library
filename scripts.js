@@ -9,7 +9,6 @@ const submitBtn = document.querySelector("#submit");
 const libraryContainer = document.querySelector("#library");
 const statsBar = document.querySelector("#stats");
 
-
 function Book(title, author, pages, read) {
     this.title = title;
     this.author = author;
@@ -37,7 +36,17 @@ let library = {
         let infoPage = createInfo(book);
         newBook.appendChild(infoPage);
         let bookText = document.createElement("h2");
-        bookText.textContent = book.title;
+        if (book.title.length > 40) 
+        {
+            let displayTitle = book.title;
+            displayTitle = displayTitle.slice(0, 40);
+            displayTitle = displayTitle + "...";
+            bookText.textContent = displayTitle;
+        }
+        else 
+        {
+            bookText.textContent = book.title;
+        }
         bookText.classList.add("bookText");
         newBook.appendChild(bookText);
         let info = document.createElement("button");
@@ -59,6 +68,7 @@ let library = {
     //Function to add a new book to the shelf array
     addToLibrary: function(book) {
         this.shelf.push(book);
+        localStorage.setItem("libraryShelf", JSON.stringify(library.shelf));
         this.displayBooks();
         refreshStats();
     },
@@ -69,7 +79,10 @@ let library = {
         {
             for (let i = 0; i < numOfBooks - 1; i++) 
             {
-                libraryContainer.removeChild(libraryContainer.children[0]);
+                if (libraryContainer.children[0] != addBookDiv)
+                {
+                    libraryContainer.removeChild(libraryContainer.children[0]);
+                }
             }
         }
         for (let i = 0; i < numOfBooks; i++) 
@@ -82,7 +95,10 @@ let library = {
         let numOfBooks = this.shelf.length;
         for (let i = 0; i < numOfBooks; i++)
         {
-            libraryContainer.removeChild(libraryContainer.children[0]);
+            if (libraryContainer.children[0] != addBookDiv)
+                {
+                    libraryContainer.removeChild(libraryContainer.children[0]);
+                }
         }
         for (let i = 0; i < numOfBooks; i++) 
         {
@@ -91,6 +107,14 @@ let library = {
         }
     }
 };
+
+//Checks localStorage to see if there is a library
+if (localStorage.getItem("libraryShelf"))
+{
+    console.log("localLib");
+    library.shelf = JSON.parse(localStorage.getItem("libraryShelf"));
+    library.refreshLibrary();
+}
 
 //Function to make form appear when clicking addBookBtn
 function openForm() {
@@ -222,6 +246,7 @@ function removeFromLib(e) {
     library.shelf.splice(index, 1);
     book.remove();
     library.refreshLibrary();
+    localStorage.setItem("libraryShelf", JSON.stringify(library.shelf));
     refreshStats();
 }
 
