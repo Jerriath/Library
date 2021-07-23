@@ -24,18 +24,21 @@
             </div>
         </div>
         <!--Use a div here because form refreshes page after submitting or closing form-->
-        <div id="bookForm" class="book">
+        <form id="bookForm" class="book" onsubmit="return false">
             <button class="closeFormBtn" onclick="closeForm()">x</button>
             <label for="titleInput" class="label">Title: </label>
-            <input type="text" name="titleInput" class="textInput" id="titleInput">
+            <input type="text" name="titleInput" class="textInput" id="titleInput" minlength="2">
             <label for="authorInput" class="label">Author: </label>
-            <input type="text" name="authorInput" class="textInput" id="authorInput">
+            <input type="text" name="authorInput" class="textInput" id="authorInput" minlength="3">
             <label for="pagesInput" class="label">Pages: </label>
-            <input type="number" name="pagesInput" class="textInput" id="pagesInput">
+            <input type="number" name="pagesInput" class="textInput" id="pagesInput" min="1">
             <label for="readInput" class="label">Have you read this book? </label>
             <br>
             <input type="checkbox" name="readInput" id="readInput">
             <button id="submit">Submit</button>
+        </form>
+        <div id="formError">
+
         </div>
         <script src="scripts.js"></script>
     </body>

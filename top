@@ -1,0 +1,77 @@
+[33mcommit 64e2adf1f5b21b5cc34a0176abf25e2ca60120fd[m[33m ([m[1;36mHEAD -> [m[1;32mform-ui[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/form-ui[m[33m, [m[1;32mmain[m[33m)[m
+Author: Jerry Zhang <jerryzhang101@yahoo.com>
+Date:   Mon Jun 14 13:35:43 2021 -0400
+
+    Implemented a local storage so books remain on refresh
+
+[33mcommit aa90772b40b2707e82006dd1e76a7e4abe097b90[m
+Author: Jerry Zhang <jerryzhang101@yahoo.com>
+Date:   Mon Jun 14 11:42:22 2021 -0400
+
+    statsBar refreshes to dynamically update library info
+
+[33mcommit 8abf2af2dde825f223b320684e4b9b6b60d4c3bc[m
+Author: Jerry Zhang <jerryzhang101@yahoo.com>
+Date:   Mon Jun 14 11:36:48 2021 -0400
+
+    Fixed issue of removing wrong book
+
+[33mcommit a5746a3c5f7741a9d6e6a2caf3f3c4aa2bd30ceb[m
+Author: Jerry Zhang <jerryzhang101@yahoo.com>
+Date:   Fri Jun 11 15:47:22 2021 -0400
+
+    Added HTML and CSS elements to stats bar
+
+[33mcommit d05d7691c48a17df1d9911dcd26989875b8929fb[m
+Author: Jerry Zhang <jerryzhang101@yahoo.com>
+Date:   Fri Jun 11 15:34:29 2021 -0400
+
+    Library is now fully functional
+
+[33mcommit 7497e5d93ff1b3d5b3252b4d0dffed3efb2234ce[m
+Author: Jerry Zhang <jerryzhang101@yahoo.com>
+Date:   Fri Jun 11 14:02:33 2021 -0400
+
+    infoPage can now change read status of book
+
+[33mcommit b3db5726b860c4ff60d1478f8f8047c1a0521464[m
+Author: Jerry Zhang <jerryzhang101@yahoo.com>
+Date:   Fri Jun 11 12:15:48 2021 -0400
+
+    Added elements to infoPage and redid display function
+
+[33mcommit c083b0c2c4c84284dedbce4bcbcf2b01c26d48b0[m
+Author: Jerry Zhang <jerryzhang101@yahoo.com>
+Date:   Thu Jun 10 14:25:31 2021 -0400
+
+    Added infoPage to info button and can open and close it
+
+[33mcommit 401f95c27f1140c3b2be89c0c95b56d4a27429d0[m
+Author: Jerry Zhang <jerryzhang101@yahoo.com>
+Date:   Thu Jun 10 13:54:08 2021 -0400
+
+    Able to add books to library and altered displayBooks function
+
+[33mcommit 14c675a698b761e0d191e62e0819b8d06d73bd33[m
+Author: Jerry Zhang <jerryzhang101@yahoo.com>
+Date:   Wed Jun 9 17:05:34 2021 -0400
+
+    Added most of form elements and began form functions
+
+[33mcommit e262f311e9a664ad1f172612641dd688170e6683[m
+Author: Jerry Zhang <jerryzhang101@yahoo.com>
+Date:   Wed Jun 9 16:55:20 2021 -0400
+
+    Added functionality to open and close form
+
+[33mcommit 6dbbfc4b78180e7aec41d334d0adaa70bebfec56[m
+Author: Jerry Zhang <jerryzhang101@yahoo.com>
+Date:   Wed Jun 9 16:45:28 2021 -0400
+
+    Added all necessary ui elements and a couple of functions
+
+[33mcommit 158ef47621cb20bf23405d7d7ce98f11609bfeb2[m
+Author: Jerry Zhang <jerryzhang101@yahoo.com>
+Date:   Wed Jun 9 12:35:51 2021 -0400
+
+    First commit

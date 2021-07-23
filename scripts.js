@@ -111,7 +111,6 @@ let library = {
 //Checks localStorage to see if there is a library
 if (localStorage.getItem("libraryShelf"))
 {
-    console.log("localLib");
     library.shelf = JSON.parse(localStorage.getItem("libraryShelf"));
     library.refreshLibrary();
 }
@@ -119,11 +118,28 @@ if (localStorage.getItem("libraryShelf"))
 //Function to make form appear when clicking addBookBtn
 function openForm() {
     bookForm.style.display = "inline-block";
+    let titleInput = document.querySelector("#titleInput");
+    let authorInput = document.querySelector("#authorInput");
+    let pagesInput = document.querySelector("#pagesInput");
+    titleInput.required = true;
+    authorInput.required = true;
+    pagesInput.required = true;
 }
 
 //Function to close form when clicking the x button
 function closeForm() {
+    let titleInput = document.querySelector("#titleInput");
+    let authorInput = document.querySelector("#authorInput");
+    let pagesInput = document.querySelector("#pagesInput");
+    titleInput.required = false;
+    authorInput.required = false;
+    pagesInput.required = false;
     bookForm.style.display = "none";
+    let formError = document.querySelector("#formError");
+    while (formError.firstChild) {
+        formError.firstChild.remove();
+    }
+    formError.style.display = "none";
 }
 
 //Function to close infoPage when clicking the x button
@@ -145,18 +161,65 @@ function addBookToLib() {
     else {
         newRead = false;
     }
-    newBook = new Book(newTitle, newAuthor, newPages, newRead);
-    library.addToLibrary(newBook);
+
+    if (checkFormInputs())
+    {
+        newBook = new Book(newTitle, newAuthor, newPages, newRead);
+        library.addToLibrary(newBook);
+        let formError = document.querySelector("#formError");
+        while (formError.firstChild) {
+            formError.firstChild.remove();
+        }
+        formError.style.display = "none";
+        return true;
+    }
+    return false;
+}
+
+//Function for checking form inputs
+function checkFormInputs() {
+    let newTitle = document.querySelector("#titleInput");
+    let newAuthor = document.querySelector("#authorInput");
+    let newPages = document.querySelector("#pagesInput");
+    let formError = document.querySelector("#formError");
+    while (formError.firstChild) {
+        formError.firstChild.remove();
+    }
+    if (!newTitle.checkValidity() || !newAuthor.checkValidity() || !newPages.checkValidity()) {
+        let titleError = document.createElement("p");
+        let authorError = document.createElement("p");
+        let pagesError = document.createElement("p");
+        titleError.textContent = newTitle.validationMessage;
+        authorError.textContent = newAuthor.validationMessage;
+        pagesError.textContent = newPages.validationMessage;
+        if (titleError.textContent != ""); {
+            formError.appendChild(titleError);
+        }
+        if (authorError.textContent != "") {
+            formError.appendChild(authorError);
+        }
+        if (pagesError.textContent != "") {
+            formError.appendChild(pagesError);
+        }
+        formError.style.display = "block";
+        return false;
+    }
+    else {
+        return true;
+    }
 }
 
 //Function to add book when clickling submit
 submitBtn.addEventListener("click", () => {
-    addBookToLib();
-    document.querySelector("#titleInput").value = "";
-    document.querySelector("#authorInput").value = "";
-    document.querySelector("#pagesInput").value = "";
-    document.querySelector("#readInput").checked = false;
-    bookForm.style.display = "none";
+    let outcome = addBookToLib();
+    if (outcome) {
+        document.querySelector("#titleInput").value = "";
+        document.querySelector("#authorInput").value = "";
+        document.querySelector("#pagesInput").value = "";
+        document.querySelector("#readInput").checked = false;
+        closeForm();
+    }
+    
 });
 
 //Function to create info page and return it
@@ -240,7 +303,6 @@ function changeStatus(e) {
 
 //Function for removing a book from library
 function removeFromLib(e) {
-    console.log(e.target.parentElement.children[1].outerText);
     let book = e.target.parentElement;
     index = book.firstChild.children[4].textContent;
     library.shelf.splice(index, 1);

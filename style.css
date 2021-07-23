@@ -64,6 +64,21 @@
     border-bottom-left-radius: 0px;
 }
 
+#formError {
+    display: none;
+    position: fixed;
+    top: 0;
+    bottom: 215px;
+    left: 474px;
+    right: 0;
+    margin: auto;
+    width: 200px;
+    height: 200px;
+    border: 2px solid red;
+    background-color: white;
+    
+}
+
 .statsLeft {
     display: flex;
     flex-direction: column;
@@ -177,6 +192,10 @@
     position: absolute;
     bottom: -10px;
     text-align: left
+}
+
+input:invalid {
+    background-color: red;
 }
 
 body {
